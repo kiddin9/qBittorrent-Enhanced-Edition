@@ -6,7 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI support for qBittorrent
-LUCI_DEPENDS:=+qBittorrent
+LUCI_DEPENDS:=+qBittorrent-Enhanced-Edition
 LUCI_PKGARCH:=all
 
 define Package/luci-app-qbittorrent/conffiles
