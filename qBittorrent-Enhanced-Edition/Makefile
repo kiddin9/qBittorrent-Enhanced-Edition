@@ -22,7 +22,7 @@ PKG_USE_MIPS16:=0
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)
-  SUBMENU:=$(PKG_INSTALL_DIR)
+  SUBMENU:=qBittorrent
   SECTION:=net
   CATEGORY:=Network
   TITLE:=bittorrent client programmed in C++ / Qt
