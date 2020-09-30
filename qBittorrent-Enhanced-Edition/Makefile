@@ -1,3 +1,9 @@
+#
+# Copyright (C) 2017-2020
+#
+# This is free software, licensed under the GNU General Public License v2.
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qBittorrent-Enhanced-Edition
@@ -22,20 +28,28 @@ PKG_USE_MIPS16:=0
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)
-  SUBMENU:=BitTorrent
-  SECTION:=net
-  CATEGORY:=Network
-  TITLE:=bittorrent client programmed in C++ / Qt
-  URL:=https://github.com/c0re100/qBittorrent-Enhanced-Edition
-  DEPENDS:=+libstdcpp +libopenssl +zlib +qt5-core +qt5-network +qt5-xml +libtorrent-rasterbar +python3
+	SECTION:=net
+	CATEGORY:=Network
+	SUBMENU:=BitTorrent
+	DEPENDS:=+libstdcpp \
+		+libtorrent-rasterbar \
+		+libopenssl \
+		+qt5-core \
+		+qt5-network \
+		+qt5-xml \
+		+zlib \
+		+python3
+	TITLE:=bittorrent client programmed in C++ / Qt
+	URL:=https://www.qbittorrent.org/
+	PROVIDES:=qBittorrent
 endef
 
 define Package/$(PKG_NAME)/description
-qBittorrent is a bittorrent client programmed in C++ / Qt that uses 
-libtorrent (sometimes called libtorrent-rasterbar) by Arvid Norberg.
-It aims to be a good alternative to all other bittorrent clients out 
-there. qBittorrent is fast, stable and provides unicode support as 
-well as many features.
+  qBittorrent is a bittorrent client programmed in C++ / Qt that uses
+  libtorrent (sometimes called libtorrent-rasterbar) by Arvid Norberg.
+  It aims to be a good alternative to all other bittorrent clients out
+  there. qBittorrent is fast, stable and provides unicode support as
+  well as many features.
 endef
 
 CONFIGURE_VARS += \
@@ -51,12 +65,15 @@ CONFIGURE_ARGS += \
 MAKE_VARS += \
 	INSTALL_ROOT="$(PKG_INSTALL_DIR)"
 
+TARGET_CFLAGS += -std=c++14 -ffunction-sections -fdata-sections -flto
+TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+
 define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(SED) '/<context>/{:a;N;/<\/context>/!ba;/\/gui\//d}' `ls $(PKG_BUILD_DIR)/src/lang/qbittorrent_*.ts`
 endef
 
-define Package/qbittorrent/conffiles
+define Package/$(PKG_NAME)/conffiles
 /etc/config/qbittorrent
 endef
 
