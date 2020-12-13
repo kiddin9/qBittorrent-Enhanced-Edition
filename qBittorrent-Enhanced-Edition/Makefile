@@ -37,6 +37,7 @@ define Package/$(PKG_NAME)
 		+qt5-core \
 		+qt5-network \
 		+qt5-xml \
+		+qt5-sql \
 		+zlib \
 		+python3
 	TITLE:=bittorrent client programmed in C++ / Qt
