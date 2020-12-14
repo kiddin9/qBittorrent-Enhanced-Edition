@@ -159,7 +159,6 @@ CONFIGURE_ARGS = \
 		-no-compile-examples \
 		-no-feature-concurrent \
 		-no-feature-gssapi \
-		-no-feature-sql \
 		-no-feature-testlib \
 		-make libs \
 		-nomake examples \
