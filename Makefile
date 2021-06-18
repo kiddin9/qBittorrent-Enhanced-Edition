@@ -33,9 +33,11 @@ define Package/$(PKG_NAME)
 	DEPENDS:=+libgcc +libstdcpp \
 		+rblibtorrent \
 		+libopenssl \
+		+python3 \
 		+qt5-core \
 		+qt5-network \
 		+qt5-xml \
+		+qt5-sql \
 		+zlib
 	TITLE:=bittorrent client programmed in C++ / Qt
 	URL:=https://www.qbittorrent.org/
@@ -60,6 +62,11 @@ MAKE_VARS += \
 
 
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
+
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	$(SED) '/<context>/{:a;N;/<\/context>/!ba;/\/gui\//d}' `ls $(PKG_BUILD_DIR)/src/lang/qbittorrent_*.ts`
+endef
 
 define Package/$(PKG_NAME)/conffiles
 /etc/config/qbittorrent
