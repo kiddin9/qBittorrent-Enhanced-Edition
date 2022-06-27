@@ -36,10 +36,8 @@ define Package/$(PKG_NAME)
 	DEPENDS:=+libgcc +libstdcpp \
 		+rblibtorrent \
 		+libopenssl \
-			
 		+qt5-core \
 		+qt5-network \
-			
 		+qt5-sql \
 		+qt5-xml \
 		+zlib
